@@ -3,6 +3,6 @@ numpy
 matplotlib
 scikit-learn
 streamlit
-tensorflow==2.19.0
+tensorflow
 pillow
-gdown
+huggingface_hub
