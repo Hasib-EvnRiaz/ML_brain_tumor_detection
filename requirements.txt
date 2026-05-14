@@ -1,6 +1,6 @@
-opencv-python
+opencv-python-headless
 numpy
-tensorflow
 matplotlib
 scikit-learn
 streamlit
+tensorflow==2.19.0
