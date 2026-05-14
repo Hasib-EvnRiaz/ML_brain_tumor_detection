@@ -1,1 +1,3 @@
+https://hasibmlbraintumordetection.streamlit.app/
 
+trained model will downloaded from huggingface.co when app runs cause of large file
