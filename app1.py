@@ -32,8 +32,8 @@ inv_class_mappings = {v: k for k, v in class_mappings.items()}
 @st.cache_resource
 def load_my_model():
     model_path = hf_hub_download(
-        repo_id="hasibevnriaz/ML.brain_tumor_detect",  # 👈 CHANGE THIS
-        filename="eff_model.keras"  # must match your HF file name
+        repo_id="hasibevnriaz/ML.brain_tumor_detect",  # 
+        filename="eff_model.keras"  # must match  HF file name
     )
     return load_model(model_path)
 
@@ -66,7 +66,7 @@ def predict_tumor(img):
     prediction = model.predict(img, verbose=0)[0]
 
     predictions_dict = {
-        inv_class_mappings[i]: float(prediction[i])
+        inv_class_mappings[i]: float(prediction[i]*100)
         for i in range(num_classes)
     }
 
@@ -95,7 +95,7 @@ if uploaded_file is not None:
         # -----------------------------
         st.subheader("Prediction Results")
 
-        st.json(preds)
+        st.json({k: f"{v:.2f}%" for k, v in preds.items()})
 
         # Bar chart
         fig, ax = plt.subplots()
@@ -103,9 +103,9 @@ if uploaded_file is not None:
         probs = list(preds.values())
 
         ax.bar(classes, probs)
-        ax.set_ylim(0, 1)
+        ax.set_ylim(0, 100)
         ax.set_title("Prediction Probabilities")
-        ax.set_ylabel("Probability")
+        ax.set_ylabel("Probability (%)")
         ax.tick_params(axis='x', rotation=45)
 
         st.pyplot(fig)
